@@ -1,13 +1,9 @@
-<!-- templates/resultados.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados de Búsqueda</title>
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
 </head>
 <body>
     <h1>Resultados de Búsqueda</h1>
@@ -15,15 +11,12 @@
         <ul>
         {% for resultado in resultados %}
             <li>
-                <a href="{{ resultado.link }}">{{ resultado.titulo }}</a> - {{ resultado.precio }}
+                <a href="{{ resultado.link }}">{{ resultado.titulo }}</a> - {{ resultado.precio }} ({{ resultado.tienda }})
             </li>
         {% endfor %}
         </ul>
     {% else %}
         <p>No se encontraron resultados.</p>
     {% endif %}
-
-    <a href="/">Realizar otra búsqueda</a>
-    
 </body>
 </html>

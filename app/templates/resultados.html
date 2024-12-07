@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados de Búsqueda</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
 </head>
 <body>
     <h1>Resultados de Búsqueda</h1>
@@ -19,5 +22,8 @@
     {% else %}
         <p>No se encontraron resultados.</p>
     {% endif %}
+
+    <a href="/">Realizar otra búsqueda</a>
+    
 </body>
 </html>

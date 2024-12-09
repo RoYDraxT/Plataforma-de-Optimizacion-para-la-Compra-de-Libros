@@ -1,19 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
-
+    <title>Buscar Precio de Libro</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>Buscar Precio de Libro</h1>
-    <form method="POST" action="/buscar">
-        <label for="nombre_libro">Nombre del libro:</label>
-        <input type="text" id="nombre_libro" name="nombre_libro" required>
-        <button type="submit">Buscar</button>
-    </form>
+    <!-- Encabezado de navegación -->
+    <header class="navbar">
+        <div class="logo">Nombre de la Página</div>
+    </header>
+
+    <!-- Sección principal -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Encuentra tu Libro Favorito al Mejor Precio</h1>
+            <p>Descubre una amplia selección de libros a precios increíbles. Ya sea que busques los últimos bestsellers, clásicos o títulos específicos. Encuentra tu próxima lectura favorita sin romper el bolsillo</p>
+            <div class="hero-buttons">
+                <form method="POST" action="/buscar">
+                    <input type="text" id="nombre_libro" name="nombre_libro" required>
+                    <button type="submit" class="btn-primary">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

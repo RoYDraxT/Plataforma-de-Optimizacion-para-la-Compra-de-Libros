@@ -1,26 +1,139 @@
+/* Diseño global */
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f7f7;
+    color: #fff;
 }
 
-h1 {
-    color: #333;
+h1, h2, h3, p {
+    margin: 0;
 }
 
-form {
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Encabezado */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+}
+
+.navbar .logo {
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li a {
+    font-size: 1em;
+    color: #fff;
+    transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: #ffc107;
+}
+
+/* Sección principal */
+.hero {
+    background: url('https://www.integrastruct.com/wp-content/uploads/2024/11/Home-Improvement-Services-1.webp') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: flex-start; /* Alinea el contenido hacia la izquierda */
+    align-items: center;
+    text-align: left; /* Alinea el texto a la izquierda */
+    position: relative;
+    padding-left: 50px; /* Añade un margen a la izquierda */
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Efecto oscuro */
+    z-index: 1;
+}
+
+.hero-text {
+    z-index: 2;
+    color: #fff;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.hero-text h1 {
+    font-size: 3em;
+    font-weight: 600;
     margin-bottom: 20px;
 }
 
-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.hero-text p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
 }
 
-button:hover {
-    background-color: #0056b3;
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-direction: column; /* Cambia la dirección a columna */
+    align-items: flex-start; /* Alinea los elementos a la izquierda */
+}
+
+input[type="text"] {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px; /* Ancho del campo de entrada */
+}
+
+.btn-primary, .btn-secondary {
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: 600;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.btn-primary:hover {
+    background-color: #e0a800;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    background-color: #fff;
+    color: #000;
 }

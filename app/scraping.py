@@ -95,3 +95,24 @@ def buscar_precio_libro_la_familia(nombre_libro):
             continue
 
     return resultados
+
+def buscar_precio_libro():
+    # Pedir al usuario el nombre del libro
+    nombre_libro = input("Ingresa el nombre del libro que deseas buscar: ")
+
+    # Llamar a las funciones específicas para cada tienda
+    resultados_crisol = buscar_precio_libro_crisol(nombre_libro)[:3]
+    resultados_sbs = buscar_precio_libro_sbs(nombre_libro)[:3]
+    resultados_la_familia = buscar_precio_libro_la_familia(nombre_libro)[:3]
+
+    # Combinar resultados
+    resultados = resultados_crisol + resultados_sbs + resultados_la_familia
+
+    # Imprimir los resultados en el formato deseado
+    for resultado in resultados:
+        print(f"{resultado['titulo']} - {resultado['precio']} - {resultado['tienda']} - {resultado['link']}")
+
+    # Devolver los resultados si es necesario
+    return resultados
+
+

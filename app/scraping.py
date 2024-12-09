@@ -64,3 +64,55 @@ def buscar_precio_libro_sbs(nombre_libro):
             continue  
 
     return resultados
+
+def buscar_precio_libro_la_familia(nombre_libro):
+    # Estandarizamos el input convirtiéndolo a minúsculas
+    nombre_libro = nombre_libro.strip().lower()
+    # Reemplazamos los espacios con '+' para formar una URL compatible con la página
+    nombre_libro_url = nombre_libro.replace(" ", "+")
+    
+    # URL de búsqueda específica para La Familia
+    url = f"https://lafamilia.com.pe/?s={nombre_libro_url}&post_type=product"
+    
+    # Realizamos la solicitud HTTP
+    response = requests.get(url)
+    
+    # Verificamos que la respuesta sea exitosa
+    if response.status_code != 200:
+        print("Error al acceder a la página")
+        return None
+    
+    # Analizamos el contenido HTML
+    soup = BeautifulSoup(response.text, 'html.parser')
+    
+    # Buscamos todos los productos en la página
+    productos = soup.find_all('h3', class_='wd-entities-title')
+    
+    if not productos:
+        print("No se encontraron resultados para el libro.")
+        return None
+    
+    # Creamos una lista para almacenar los productos con nombre y precio
+    lista_productos = []
+    
+    for producto in productos:  # Recorremos todos los productos encontrados
+        # Intentamos extraer el nombre del libro
+        nombre = producto.find('a')
+        if nombre:
+            nombre_libro = nombre.text.strip()
+        
+        # Intentamos extraer el precio del libro
+        precio = producto.find_next('span', class_='woocommerce-Price-amount')
+        if precio:
+            precio_texto = precio.text.strip()
+            # Extraemos solo el número del precio, eliminando la moneda
+            precio_numero = float(precio_texto.replace('S/', '').strip())
+        
+            # Agregamos el producto con el precio como número
+            lista_productos.append((nombre_libro, precio_texto, precio_numero))
+    
+    # Ordenamos los productos por el precio de menor a mayor
+    lista_productos_ordenada = sorted(lista_productos, key=lambda x: x[2])
+    
+    # Retornamos los 3 productos con los precios más bajos
+    return lista_productos_ordenada[:3]

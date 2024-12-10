@@ -50,7 +50,7 @@ def buscar_precio_libro_sbs(nombre_libro):
     response = requests.get(url, headers=headers)
 
     if response.status_code != 200:
-        return [{"titulo": "Error al acceder a sbs", "precio": "N/A", "link": "Error", "tienda": "SBS"}]
+        return [{"titulo": "Error al acceder a sbs", "precio": "N/A", "link": "Error", "tienda": "SBS", "imagen": ""}]
 
     soup = BeautifulSoup(response.text, "html.parser")
 
@@ -58,7 +58,7 @@ def buscar_precio_libro_sbs(nombre_libro):
     libros = soup.find_all("div", class_="product-item-info")
 
     if not libros:
-        return [{"titulo": "No se encontraron resultados en SBS", "precio": "N/A", "link": "", "tienda": "SBS"}]
+        return [{"titulo": "No se encontraron resultados en SBS", "precio": "N/A", "link": "", "tienda": "SBS", "imagen": ""}]
 
     resultados = []
     for libro in libros:
@@ -66,10 +66,17 @@ def buscar_precio_libro_sbs(nombre_libro):
             titulo = libro.find("a", class_="product-item-link").text.strip()
             precio = libro.find("span", class_="price").text.strip()
             link = libro.find("a", class_="product-item-link")["href"]
-            resultados.append({"titulo": titulo, "precio": precio, "link": link, "tienda": "SBS"})
+            imagen_url = libro.find("img", class_="product-image-photo")["src"]
+            resultados.append({
+                "titulo": titulo,
+                "precio": precio,
+                "link": link,
+                "tienda": "SBS",
+                "imagen": imagen_url
+            })
         except AttributeError:
             continue  
-
+    
     return resultados
 
 def buscar_precio_libro_la_familia(nombre_libro):
@@ -108,5 +115,15 @@ def buscar_precio_libro_la_familia(nombre_libro):
             })
         except AttributeError:
             continue
-
+    
     return resultados
+
+def buscar_precios(nombre_libro):
+    resultados_crisol = buscar_precio_libro_crisol(nombre_libro)
+    resultados_sbs = buscar_precio_libro_sbs(nombre_libro)
+    resultados_la_familia = buscar_precio_libro_la_familia(nombre_libro)
+
+    resultados_combined = resultados_crisol + resultados_sbs + resultados_la_familia
+    resultados_sorted = sorted(resultados_combined, key=lambda x: float(x["precio"].replace("S/", "").replace(",", "")))
+
+    return resultados_sorted

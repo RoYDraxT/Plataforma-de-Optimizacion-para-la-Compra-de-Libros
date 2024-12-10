@@ -3,22 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultados de Búsqueda</title>
+    <title>FindMyBook</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Resultados de Búsqueda</h1>
-    {% if resultados %}
-        <ul>
-        {% for resultado in resultados %}
-            <li>
-                <img src="{{ resultado.imagen }}" alt="{{ resultado.titulo }}" width="154" height="252" />
+    <header class="navbar_res">
+        <div class="logo_res">Resultados de Búsqueda</div>
+        <a href="{{ url_for('index') }}" class="btn-primary_res">Regresar</a>
+    </header>
 
-                <a href="{{ resultado.link }}">{{ resultado.titulo }}</a> - {{ resultado.precio }} ({{ resultado.tienda }})
-            </li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No se encontraron resultados.</p>
-    {% endif %}
+    <div class="resultados">
+        {% if resultados %}
+            {% for resultado in resultados %}
+                <div class="producto">
+                    <img src="{{ resultado.imagen }}" alt="{{ resultado.titulo }}" />
+                    <h3><a href="{{ resultado.link }}">{{ resultado.titulo }}</a></h3>
+                    <p>{{ resultado.precio }} ({{ resultado.tienda }})</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-resultados">No se encontraron resultados.</p>
+        {% endif %}
+    </div>
 </body>
 </html>

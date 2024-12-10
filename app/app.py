@@ -1,7 +1,5 @@
 from flask import Flask, render_template, request
-from bs4 import BeautifulSoup
-import requests
-from scraping import buscar_precio_libro_crisol, buscar_precio_libro_sbs, buscar_precio_libro_la_familia
+from scraping import buscar_precios
 
 app = Flask(__name__)
 
@@ -13,13 +11,7 @@ def index():
 def buscar():
     nombre_libro = request.form['nombre_libro']
     
-    # Llamadas a funciones de scraping
-    resultados_crisol = buscar_precio_libro_crisol(nombre_libro)[:3]
-    resultados_sbs = buscar_precio_libro_sbs(nombre_libro)[:3]
-    resultados_familia = buscar_precio_libro_la_familia(nombre_libro)[:3]
-
-    # Combina todos los resultados
-    resultados = resultados_crisol + resultados_sbs + resultados_familia
+    resultados = buscar_precios(nombre_libro)
     
     return render_template('resultados.html', resultados=resultados)
 if __name__ == '__main__':

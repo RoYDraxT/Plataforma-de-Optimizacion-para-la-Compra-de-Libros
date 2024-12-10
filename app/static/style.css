@@ -4,11 +4,12 @@ body {
     padding: 0;
     font-family: 'Poppins', sans-serif;
     background-color: #f7f7f7;
-    color: #fff;
+    color: #f7f7f7; /* Cambié a un color más oscuro para mejorar la legibilidad */
 }
 
 h1, h2, h3, p {
     margin: 0;
+    
 }
 
 a {
@@ -34,9 +35,25 @@ ul {
     z-index: 10;
 }
 
+.navbar_res {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5% 50px;
+    background-color: rgba(0, 0, 0, 0.925);
+    position: static;
+    width: 100%;
+    z-index: 10;
+}
+
 .navbar .logo {
     font-size: 1.5em;
     font-weight: 600;
+}
+
+.navbar_res .logo_res {
+    font-size: 2em;
+    font-weight: 650;
 }
 
 .nav-links {
@@ -59,11 +76,11 @@ ul {
     background: url('https://www.integrastruct.com/wp-content/uploads/2024/11/Home-Improvement-Services-1.webp') no-repeat center center/cover;
     height: 100vh;
     display: flex;
-    justify-content: flex-start; /* Alinea el contenido hacia la izquierda */
+    justify-content: flex-start;
     align-items: center;
-    text-align: left; /* Alinea el texto a la izquierda */
+    text-align: left;
     position: relative;
-    padding-left: 50px; /* Añade un margen a la izquierda */
+    padding-left: 50px;
 }
 
 .hero::after {
@@ -73,7 +90,7 @@ ul {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Efecto oscuro */
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
 
@@ -85,21 +102,24 @@ ul {
 }
 
 .hero-text h1 {
-    font-size: 3em;
+    font-size: 3.5em;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
+    margin-right: -300px;
+    line-height: 1.1;
 }
 
 .hero-text p {
     font-size: 1.2em;
     margin-bottom: 30px;
+    margin-right: -300px;
 }
 
 .hero-buttons {
     display: flex;
     gap: 15px;
-    flex-direction: column; /* Cambia la dirección a columna */
-    align-items: flex-start; /* Alinea los elementos a la izquierda */
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 input[type="text"] {
@@ -107,7 +127,7 @@ input[type="text"] {
     font-size: 1em;
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 300px; /* Ancho del campo de entrada */
+    width: 300px;
 }
 
 .btn-primary, .btn-secondary {
@@ -121,6 +141,21 @@ input[type="text"] {
 .btn-primary {
     background-color: #ffc107;
     color: #000;
+    margin-left: 10px;
+}
+
+.btn-primary_res {
+    background-color: #ffc107;
+    color: #000;
+    margin-right: 90px;
+}
+
+.btn-primary_res, .btn-secondary {
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: 600;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .btn-primary:hover {
@@ -136,4 +171,65 @@ input[type="text"] {
 .btn-secondary:hover {
     background-color: #fff;
     color: #000;
+}
+
+/* Estilos para la lista de productos */
+.resultados {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.producto {
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    padding: 20px;
+    border-radius: 8px;
+    width: 250px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.producto:hover {
+    transform: translateY(-10px);
+}
+
+.producto img {
+    width: 100%;
+    height: 320px;
+    height: cover;
+    border-radius: 8px;
+}
+
+.producto h3 {
+    font-size: 1.2rem;
+    color: #34495e;
+    margin: 10px 0;
+}
+
+.producto p {
+    font-size: 1rem;
+    color: #e74c3c;
+    margin: 10px 0;
+}
+
+.producto a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.producto a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos para la lista si no hay resultados */
+.no-resultados {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #95a5a6;
 }

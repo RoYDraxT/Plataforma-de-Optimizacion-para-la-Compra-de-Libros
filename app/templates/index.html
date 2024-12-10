@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar Precio de Libro</title>
+    <title>FindMyBook</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,14 +12,15 @@
 <body>
     <!-- Encabezado de navegación -->
     <header class="navbar">
-        <div class="logo">Nombre de la Página</div>
+        <div class="logo">FindMyBook</div>
     </header>
 
     <!-- Sección principal -->
     <section class="hero">
         <div class="hero-text">
-            <h1>Encuentra tu Libro Favorito al Mejor Precio</h1>
-            <p>Descubre una amplia selección de libros a precios increíbles. Ya sea que busques los últimos bestsellers, clásicos o títulos específicos. Encuentra tu próxima lectura favorita sin romper el bolsillo</p>
+            <h1>Tu Búsqueda de Libros Nunca Fue Tan Fácil</h1>
+            <p>La mejor selección de libros a precios exclusivos solo para ti.
+                Ya sea que busques entretenimiento, conocimiento o inspiración, aquí encontrarás lo que buscas. ¡Haz de la lectura tu pasatiempo favorito sin que te cueste una fortuna!</p>
             <div class="hero-buttons">
                 <form method="POST" action="/buscar">
                     <input type="text" id="nombre_libro" name="nombre_libro" required>

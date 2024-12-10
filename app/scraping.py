@@ -12,13 +12,13 @@ def buscar_precio_libro_crisol(nombre_libro):
     response = requests.get(url, headers=headers)
     
     if response.status_code != 200:
-        return [{"titulo": "Error al acceder a Crisol", "precio": "N/A", "link": "", "tienda": "Crisol"}]
+        return [{"titulo": "Error al acceder a Crisol", "precio": "N/A", "link": "", "tienda": "Crisol", "imagen": ""}]
     
     soup = BeautifulSoup(response.text, "html.parser")
     libros = soup.find_all("div", class_="product-item-info")
     
     if not libros:
-        return [{"titulo": "No se encontraron resultados en Crisol", "precio": "N/A", "link": "", "tienda": "Crisol"}]
+        return [{"titulo": "No se encontraron resultados en Crisol", "precio": "N/A", "link": "", "tienda": "Crisol", "imagen": ""}]
     
     resultados = []
     for libro in libros[:5]:
@@ -26,7 +26,14 @@ def buscar_precio_libro_crisol(nombre_libro):
             titulo = libro.find("a", class_="product-item-link").text.strip()
             precio = libro.find("span", class_="price").text.strip()
             link = libro.find("a", class_="product-item-link")["href"]
-            resultados.append({"titulo": titulo, "precio": precio, "link": link, "tienda": "Crisol"})
+            imagen_url = libro.find("img", class_="product-image-photo")["src"]
+            resultados.append({
+                "titulo": titulo,
+                "precio": precio,
+                "link": link,
+                "tienda": "Crisol",
+                "imagen": imagen_url
+            })
         except AttributeError:
             continue
 
@@ -76,13 +83,13 @@ def buscar_precio_libro_la_familia(nombre_libro):
     response = requests.get(url, headers=headers)
 
     if response.status_code != 200:
-        return [{"titulo": "Error al acceder a La Familia", "precio": "N/A", "link": "", "tienda": "La Familia"}]
+        return [{"titulo": "Error al acceder a La Familia", "precio": "N/A", "link": "", "tienda": "La Familia", "imagen": ""}]
 
     soup = BeautifulSoup(response.text, "html.parser")
     productos = soup.find_all("h3", class_="wd-entities-title")
 
     if not productos:
-        return [{"titulo": "No se encontraron resultados en La Familia", "precio": "N/A", "link": "", "tienda": "La Familia"}]
+        return [{"titulo": "No se encontraron resultados en La Familia", "precio": "N/A", "link": "", "tienda": "La Familia", "imagen": ""}]
 
     resultados = []
     for producto in productos[:5]:
@@ -90,29 +97,16 @@ def buscar_precio_libro_la_familia(nombre_libro):
             titulo = producto.find("a").text.strip()
             precio = producto.find_next("span", class_="woocommerce-Price-amount").text.strip()
             link = producto.find("a")["href"]
-            resultados.append({"titulo": titulo, "precio": precio, "link": link, "tienda": "La Familia"})
+            imagen_url = producto.find_previous("div", class_="product-wrapper").find("img")["src"]
+
+            resultados.append({
+                "titulo": titulo,
+                "precio": precio,
+                "link": link,
+                "tienda": "La Familia",
+                "imagen": imagen_url
+            })
         except AttributeError:
             continue
 
     return resultados
-
-def buscar_precio_libro():
-    # Pedir al usuario el nombre del libro
-    nombre_libro = input("Ingresa el nombre del libro que deseas buscar: ")
-
-    # Llamar a las funciones específicas para cada tienda
-    resultados_crisol = buscar_precio_libro_crisol(nombre_libro)[:3]
-    resultados_sbs = buscar_precio_libro_sbs(nombre_libro)[:3]
-    resultados_la_familia = buscar_precio_libro_la_familia(nombre_libro)[:3]
-
-    # Combinar resultados
-    resultados = resultados_crisol + resultados_sbs + resultados_la_familia
-
-    # Imprimir los resultados en el formato deseado
-    for resultado in resultados:
-        print(f"{resultado['titulo']} - {resultado['precio']} - {resultado['tienda']} - {resultado['link']}")
-
-    # Devolver los resultados si es necesario
-    return resultados
-
-

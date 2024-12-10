@@ -11,6 +11,8 @@
         <ul>
         {% for resultado in resultados %}
             <li>
+                <img src="{{ resultado.imagen }}" alt="{{ resultado.titulo }}" width="154" height="252" />
+
                 <a href="{{ resultado.link }}">{{ resultado.titulo }}</a> - {{ resultado.precio }} ({{ resultado.tienda }})
             </li>
         {% endfor %}

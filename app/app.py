@@ -14,9 +14,9 @@ def buscar():
     nombre_libro = request.form['nombre_libro']
     
     # Llamadas a funciones de scraping
-    resultados_crisol = buscar_precio_libro_crisol(nombre_libro)
-    resultados_sbs = buscar_precio_libro_sbs(nombre_libro)
-    resultados_familia = buscar_precio_libro_la_familia(nombre_libro)
+    resultados_crisol = buscar_precio_libro_crisol(nombre_libro)[:3]
+    resultados_sbs = buscar_precio_libro_sbs(nombre_libro)[:3]
+    resultados_familia = buscar_precio_libro_la_familia(nombre_libro)[:3]
 
     # Combina todos los resultados
     resultados = resultados_crisol + resultados_sbs + resultados_familia
